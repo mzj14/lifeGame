@@ -1,7 +1,3 @@
-/* The map is 50 * 50 size, the probability for each grid to have alive cell is 0.5 */
-
-/* The cell system will exist for 1000s, the period for the system to evolve is 1s, the evolving rules is stored in Rules.rules */
-
 function gerUserDataObject($settings, gameLengthElement, gameFrequencyElement, lifeProbabilityElement, lifeNumElements, remainNumElements){
   var liveColor = $settings[0]['live-cell-color'].value,
       deadColor = $settings[0]['dead-cell-color'].value,
@@ -52,6 +48,14 @@ $(function(){
       timer = null;
   
   var ui = new UI(cellMapElement, 'black', 'black', 'black');
+  
+  var $stopGame = $('.stop-btn');
+  
+  $stopGame.click(function(){
+    if (timer !== null){
+      timer.stopGame();
+    }
+  });
  
   ui.outputFrame(rows, cols);
   
