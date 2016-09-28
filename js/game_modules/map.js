@@ -17,7 +17,7 @@ function Map(rows, cols, lifePropability){
 // Within each gird set 'true' for life or 'false' for death according to the lifePropability.  
 Map.prototype.setInitialState = function(lifePropability){  
   var targetNum = lifePropability * 10;
-  // generate a random number from integers in [0..10]
+  // generate a random number from integers in [0..9]
   var randomNum = Math.floor(Math.random() * 10);
   // console.log(randomNum < targetNum);
   return (randomNum < targetNum);
