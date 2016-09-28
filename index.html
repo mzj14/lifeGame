@@ -6,95 +6,160 @@
   <meta name="description" content="生命游戏 演示">
   <meta name="author" content="马子俊">
   <title>生命游戏演示</title>
-  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-  <!--[if IE]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <h2>生命游戏</h2>
-  <p>如果一个生命，其周围的同类生命太少，会因为得不到帮助而死亡；如果太多，则会因为得不到足够的生命资源而死亡。 ——英国数学家约翰·康威</p>
-  <p>我们可以规定如下的"生存定律"：</p>
-  <ul>
-    <li>每个细胞的状态由该细胞及周围八个细胞上一次的状态所决定;</li>
-    <li>如果一个细胞周围有x个细胞为生，则该细胞为生，即该细胞若原先为死，则转为生，若原先为生，则保持不变;</li>
-    <li>如果一个细胞周围有y个细胞为生，则该细胞的生死状态保持不变；</li>
-    <li>在其它情况下，该细胞为死，即该细胞若原先为生，则转为死，若原先为死，则保持不变</li>
-  </ul>
-  <p>设所有满足条件的x组成数组lifeNumRange, 所有满足条件的y组成remainNumRange,则在经典的生存定律中：</p>
-  <ul>
-    <li>lifeNumRange = [3]</li>
-    <li>deathNumRange = [2]</li>
-  </ul>
-  <p>在此处，你可以重新定义生存定律，生命演化时长和速度，细胞颜色等一系列设置。</p>
-  <canvas id="cell-map" width="500" height="500" style="display: block; margin: 0 auto; margin-top 20px;">
+  <div class="container introduction-container">
+    <div class="introduction">
+      <h2 class="title">生命游戏</h2>
+      <p class="motto">一个生命，其周围的同类生命太少，会因为得不到帮助而死亡；如果太多，则会因为得不到足够的生命资源而死亡。</p>
+      <p class="writer">——英国数学家约翰·康威</p>
+      <p>我们可以规定如下的"生存定律"：</p>
+      <ul>
+        <li>每个细胞的状态由该细胞及周围八个细胞上一次的状态所决定;</li>
+        <li>如果一个细胞周围有x个细胞为生，则该细胞为生，即该细胞若原先为死，则转为生，若原先为生，则保持不变;</li>
+        <li>如果一个细胞周围有y个细胞为生，则该细胞的生死状态保持不变；</li>
+        <li>在其它情况下，该细胞为死，即该细胞若原先为生，则转为死，若原先为死，则保持不变</li>
+      </ul>
+      <p>设所有满足条件的x组成数组lifeNumRange, 所有满足条件的y组成remainNumRange,则在经典的生存定律中：</p>
+      <ul>
+        <li>lifeNumRange = [3]</li>
+        <li>deathNumRange = [2]</li>
+      </ul>
+      <p>在此处，你可以重新定义生存定律，生命演化时长和速度，细胞颜色等一系列设置。</p>
+    </div>  
+  </div>  
+  <canvas id="cell-map" width="500" height="500">
   </canvas>
-  <form id="settings" name="myForm">
-    <p>颜色设定:</p>
-    <label for="live-cell-color">活细胞颜色:</label>
-    <select id="live-cell-color" name="live-cell-color">
-      <option value="grey" selected="selected">Grey</option>
-      <option value="white">White</option>
-      <option value="red">Red</option>
-      <option value="blue">Blue</option>
-      <option value="green">Green</option>
-    </select>
-    
-    <label for="dead-cell-color">死细胞颜色:</label>
-    <select id="dead-cell-color" name="dead-cell-color">
-      <option value="grey">Grey</option>
-      <option value="white" selected="selected">White</option>
-      <option value="red">Red</option>
-      <option value="blue">Blue</option>
-      <option value="green">Green</option>
-    </select>
-    
-    <label for="grid-line-color">栅格线条颜色:</label>
-    <select id="grid-line-color" name="grid-line-color">
-      <option value="grey" selected="selected">Grey</option>
-      <option value="white">White</option>
-      <option value="red">Red</option>
-      <option value="blue">Blue</option>
-      <option value="green">Green</option>
-    </select>
-    
-    <p>游戏设定:</p>
-    <label for="game-length">生命演化时长(S):</label>
-    <input type="text" name="game-length" id="game-length" value="10"/><br/>
-    <label for="game-frequency">生命演化频率(S):</label>
-    <input type="text" name="game-frequency" id="game-frequency" value="0.2"/><br/>
-    <label for="life-probability">初始时细胞存活概率:</label>
-    <input type="text" name="life-probability" id="life-probability" value="0.5"/><br/>
-    
-    <p>生存规律:</p>
-    <label>lifeNumRange:</label><br/>
-    <input type="checkbox" name="life-num" value="0"/>0<br/>
-    <input type="checkbox" name="life-num" value="1"/>1<br/>
-    <input type="checkbox" name="life-num" value="2"/>2<br/>
-    <input type="checkbox" name="life-num" value="3" checked="checked"/>3<br/>
-    <input type="checkbox" name="life-num" value="4"/>4<br/>
-    <input type="checkbox" name="life-num" value="5"/>5<br/>
-    <input type="checkbox" name="life-num" value="6"/>6<br/>
-    <input type="checkbox" name="life-num" value="7"/>7<br/>
-    <input type="checkbox" name="life-num" value="8"/>8<br/>
+  <div class="container form-container">
+    <form id="settings" name="myForm">
+      <div class="row">
+        <p>颜色设定:</p>
+        <div class="col-xs-12 col-sm-4">
+          <label for="live-cell-color">活细胞颜色:</label>
+          <select id="live-cell-color" name="live-cell-color">
+            <option value="grey" selected="selected">Grey</option>
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+          </select>
+        </div>  
 
-    <label>remainNumRange:</label><br/>
-    <input type="checkbox" name="remain-num" value="0"/>0<br/>
-    <input type="checkbox" name="remain-num" value="1"/>1<br/>
-    <input type="checkbox" name="remain-num" value="2" checked="checked"/>2<br/>
-    <input type="checkbox" name="remain-num" value="3"/>3<br/>
-    <input type="checkbox" name="remain-num" value="4"/>4<br/>
-    <input type="checkbox" name="remain-num" value="5"/>5<br/>
-    <input type="checkbox" name="remain-num" value="6"/>6<br/>
-    <input type="checkbox" name="remain-num" value="7"/>7<br/>
-    <input type="checkbox" name="remain-num" value="8"/>8<br/>
-    <br>
-    <input type="submit" name="submit" value="Start Evolution"/>
-  </form>
-  <a href="test/index_test.html">程序测试结果在此......</a>
-  <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <div class="col-xs-12 col-sm-4">
+          <label for="dead-cell-color">死细胞颜色:</label>
+          <select id="dead-cell-color" name="dead-cell-color">
+            <option value="grey">Grey</option>
+            <option value="white" selected="selected">White</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+          </select>
+        </div>  
+
+        <div class="col-xs-12 col-sm-4">
+          <label for="grid-line-color">栅格线条颜色:</label>
+          <select id="grid-line-color" name="grid-line-color">
+            <option value="grey" selected="selected">Grey</option>
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <p>游戏设定:</p>
+        <div class="col-xs-12 col-sm-4">  
+          <label for="game-length">生命演化时长(S):</label>
+          <input type="text" name="game-length" id="game-length" value="10"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">   
+          <label for="game-frequency">生命演化频率(S):</label>
+          <input type="text" name="game-frequency" id="game-frequency" value="0.2"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">     
+          <label for="life-probability">初始时细胞存活概率:</label>
+          <input type="text" name="life-probability" id="life-probability" value="0.5"/><br/>
+        </div>
+      </div>  
+
+      <div class="row">
+        <p>生存规律:</p>
+        <div class="col-xs-12">  
+          <label>lifeNumRange:</label><br/>
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="0"/>0
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="1"/>1
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="2"/>2
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="3" checked="checked"/>3
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="4"/>4
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="5"/>5
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="6"/>6
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="7"/>7
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="life-num" value="8"/>8
+        </div>
+        
+        <div class="col-xs-12">  
+          <label>remainNumRange:</label><br/>
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="0"/>0
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="1"/>1
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="2" checked="checked"/>2
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="3"/>3
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="4"/>4
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="5"/>5
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="6"/>6
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="7"/>7
+        </div>
+        <div class="col-xs-1">
+          <input type="checkbox" name="remain-num" value="8"/>8
+        </div>
+      </div>  
+      
+      <button type="submit" name="submit" class="btn btn-primary submit-btn">Start Game</button>
+      <button type="button" class="btn btn-danger stop-btn">Stop Game</button>
+    </form>
+  </div>  
+  <a href="test/index_test.html" class="test-info">程序测试结果详情>>></a>
+    
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="js/game_modules/map.js"></script>
   <script src="js/game_modules/rules.js"></script>
   <script src="js/game_modules/ui.js"></script>
