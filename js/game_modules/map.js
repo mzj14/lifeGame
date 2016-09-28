@@ -1,3 +1,12 @@
+/* Definition of Map Object */
+
+/*
+  Function: initialize the cell map.
+  Arguments: rows -> the row number of the map;
+             cols -> the column number of the map;
+             lifePropability -> the probability of each ordinate to have alive cell, between [0..1]
+*/
+
 function Map(rows, cols, lifePropability){
   var _this = this;
       i = 0,
@@ -14,7 +23,12 @@ function Map(rows, cols, lifePropability){
   }
 }
 
-// Within each gird set 'true' for life or 'false' for death according to the lifePropability.  
+/*
+  Function: return a random life state of a cell according to the profitability
+  Arguments: lifePropability -> the probability of each ordinate to have alive cell
+  Return: true[the cell is alive] or false[the cell is dead]
+*/  
+
 Map.prototype.setInitialState = function(lifePropability){  
   var targetNum = lifePropability * 10;
   // generate a random number from integers in [0..9]
@@ -23,7 +37,13 @@ Map.prototype.setInitialState = function(lifePropability){
   return (randomNum < targetNum);
 };
 
-// find out if map[rowOrder, colOrder] had life or not
+/*
+  Function: return the current life state of a cell in (rowOrder, colOrder)
+  Arguments: rowOrder -> the order of the row in map
+             colOrder -> the order of the col in map
+  Return: true[the cell is alive] or false[the cell is dead]
+*/
+
 Map.prototype.hasLife = function(rowOrder, colOrder){
   var realRowOrder = rowOrder,
       realColOrder = colOrder;
