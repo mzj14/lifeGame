@@ -1,0 +1,55 @@
+*{
+  font-family: ""
+}
+
+
+.introduction-container{
+  text-align: center;
+}
+
+.introduction{
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.introduction *{
+  text-align: left;
+}
+
+.introduction h2.title{
+  text-align: center;
+}
+
+.introduction .writer{
+  text-align: right;
+}
+
+.introduction ul{
+  list-style-type: decimal-leading-zero;
+}
+
+#cell-map{
+  display: block;
+  margin: 40px auto;
+  margin-top: 40px;
+}
+
+.form-container{
+  margin-bottom: 20px;
+}
+
+.form-container .row{
+  margin-bottom: 20px;
+}
+
+.submit-btn, .stop-btn{
+  float: right;
+  margin-left: 30px;
+}
+
+.test-info{
+  color: saddlebrown;
+  float: right;
+  padding-right: 30px;
+  padding-bottom: 30px;
+}
