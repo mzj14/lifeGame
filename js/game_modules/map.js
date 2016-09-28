@@ -13,7 +13,6 @@ function Map(rows, cols, lifePropability){
       j = 0;
   this.cols = cols;
   this.rows = rows;
-  console.log(this);
   this.cellMap = new Array(rows);
   for (i = 0; i < rows; i++){
     this.cellMap[i] = Array.apply(null, Array(cols));
