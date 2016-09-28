@@ -1,3 +1,4 @@
+// return an object which stores user data from elements in the form
 function gerUserDataObject($settings, gameLengthElement, gameFrequencyElement, lifeProbabilityElement, lifeNumElements, remainNumElements){
   var liveColor = $settings[0]['live-cell-color'].value,
       deadColor = $settings[0]['dead-cell-color'].value,
@@ -51,6 +52,7 @@ $(function(){
   
   var $stopGame = $('.stop-btn');
   
+  // add stop game function
   $stopGame.click(function(){
     if (timer !== null){
       timer.stopGame();
@@ -59,13 +61,16 @@ $(function(){
  
   ui.outputFrame(rows, cols);
   
+  // add start game function
   $settings.submit(function(){
     event.preventDefault();
+    // stop the game first
     if (timer !== null){
       timer.stopGame();
     }
     userData = gerUserDataObject($settings, gameLengthElement, gameFrequencyElement, lifeProbabilityElement,
                               lifeNumElements, remainNumElements);
+    // get new map, rules, timer, ui, object
     map = new Map(rows, cols, userData.lifeProbability);
     rules = new Rules(userData.lifeNumRange, userData.remainNumRange);
     timer = new Timer(userData.gameLength, userData.gameFrequency);
